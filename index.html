@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Who's the Imposter</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 1rem 2rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    input {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: none;
+      margin-top: 1rem;
+      font-size: 1rem;
+      width: 70%;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 1rem;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    li {
+      background-color: #222;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .player-name {
+      flex-grow: 1;
+    }
+
+    .remove-button {
+      background: none;
+      border: none;
+      color: #f66;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="main" class="screen">
+    <h1>Who's the Imposter</h1>
+    <button onclick="goToSetup()">START</button>
+  </div>
+
+  <div id="setupScreen" class="screen">
+    <h1>Spieler hinzufügen</h1>
+    <input type="text" id="playerName" placeholder="Spitzname eingeben" />
+    <button onclick="addPlayer()">Spieler hinzufügen</button>
+    <ul id="playerList"></ul>
+    <button onclick="goToImposterCount()">Weiter</button>
+    <button onclick="cancelSetup()">Zurück zum Start</button>
+  </div>
+
+  <div id="imposterCountScreen" class="screen">
+    <h1>Anzahl Imposter wählen</h1>
+    <input type="number" id="imposterCount" value="1" min="0" />
+    <button onclick="prepareRoles()">Spiel starten</button>
+  </div>
+
+  <div id="roleRevealScreen" class="screen">
+    <h1 id="roleTitle"></h1>
+    <p id="roleInfo"></p>
+    <button id="revealButton" onclick="revealRole()">Aufdecken</button>
+    <button id="nextPlayerButton" onclick="nextPlayer()" style="display:none">Weitergeben</button>
+  </div>
+
+  <div id="gameScreen" class="screen">
+    <h1>Who's the Imposter?</h1>
+    <button onclick="showReveal()">Auflösung zeigen</button>
+  </div>
+
+  <div id="revealScreen" class="screen">
+    <h1>Auflösung</h1>
+    <ul id="revealList"></ul>
+    <button onclick="playAgain()">Ein weiteres Spiel starten</button>
+    <button onclick="goToSetup()">Beenden</button>
+  </div>
+
+  <script>
+    const screens = {
+      main: document.getElementById("main"),
+      setup: document.getElementById("setupScreen"),
+      count: document.getElementById("imposterCountScreen"),
+      reveal: document.getElementById("roleRevealScreen"),
+      game: document.getElementById("gameScreen"),
+      result: document.getElementById("revealScreen")
+    };
+
+    let players = [];
+    let imposters = [];
+    let currentPlayerIndex = 0;
+    let secretWord = "";
+
+    const playerList = document.getElementById("playerList");
+    const imposterCountInput = document.getElementById("imposterCount");
+
+    const wordList = ["Apfel", "Berlin", "Liebe", "Schach", "Elefant", "iPhone", "Pizza", "Katze", "Hund", "Buch"];
+
+    function show(screenName) {
+      Object.values(screens).forEach(s => s.style.display = "none");
+      screens[screenName].style.display = "flex";
+    }
+
+    function goToSetup() {
+      show("setup");
+    }
+
+    function cancelSetup() {
+      players = [];
+      updatePlayerList();
+      show("main");
+    }
+
+    function addPlayer() {
+      const nameInput = document.getElementById("playerName");
+      const name = nameInput.value.trim();
+      if (name && !players.includes(name)) {
+        players.push(name);
+        nameInput.value = "";
+        updatePlayerList();
+      }
+    }
+
+    function removePlayer(name) {
+      players = players.filter(p => p !== name);
+      updatePlayerList();
+    }
+
+    function updatePlayerList() {
+      playerList.innerHTML = "";
+      players.forEach(name => {
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        span.className = "player-name";
+        span.textContent = name;
+        const btn = document.createElement("button");
+        btn.className = "remove-button";
+        btn.innerHTML = "&times;";
+        btn.onclick = () => removePlayer(name);
+        li.appendChild(span);
+        li.appendChild(btn);
+        playerList.appendChild(li);
+      });
+    }
+
+    function goToImposterCount() {
+      if (players.length === 0) return alert("Bitte mindestens einen Spieler eingeben.");
+      imposterCountInput.max = players.length;
+      imposterCountInput.value = Math.min(1, players.length);
+      show("count");
+    }
+
+    function prepareRoles() {
+      const count = parseInt(imposterCountInput.value);
+      if (count < 0 || count > players.length) return alert("Ungültige Anzahl Imposter.");
+      imposters = [...players].sort(() => 0.5 - Math.random()).slice(0, count);
+      secretWord = wordList[Math.floor(Math.random() * wordList.length)];
+      currentPlayerIndex = 0;
+      showPlayerRole();
+    }
+
+    function showPlayerRole() {
+      show("reveal");
+      document.getElementById("roleTitle").textContent = players[currentPlayerIndex];
+      document.getElementById("roleInfo").textContent = "";
+      document.getElementById("revealButton").style.display = "inline-block";
+      document.getElementById("nextPlayerButton").style.display = "none";
+    }
+
+    function revealRole() {
+      const name = players[currentPlayerIndex];
+      const isImposter = imposters.includes(name);
+      document.getElementById("roleInfo").textContent = isImposter ? "Du bist der Imposter. Versuche unauffällig zu bleiben!" : `Dein Wort ist: ${secretWord}`;
+      document.getElementById("revealButton").style.display = "none";
+      document.getElementById("nextPlayerButton").style.display = "inline-block";
+    }
+
+    function nextPlayer() {
+      currentPlayerIndex++;
+      if (currentPlayerIndex < players.length) {
+        showPlayerRole();
+      } else {
+        show("game");
+      }
+    }
+
+    function showReveal() {
+      const list = document.getElementById("revealList");
+      list.innerHTML = "";
+      players.forEach(name => {
+        const li = document.createElement("li");
+        li.textContent = `${name} – ${imposters.includes(name) ? "Imposter" : "Nicht Imposter"}`;
+        list.appendChild(li);
+      });
+      show("result");
+    }
+
+    function playAgain() {
+      prepareRoles();
+    }
+
+    // Start auf Hauptscreen
+    show("main");
+  </script>
+</body>
+</html>
