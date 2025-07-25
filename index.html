@@ -146,7 +146,62 @@
     const playerList = document.getElementById("playerList");
     const imposterCountInput = document.getElementById("imposterCount");
 
-    const wordList = ["Apfel", "Berlin", "Liebe", "Schach", "Elefant", "iPhone", "Pizza", "Katze", "Hund", "Buch"];
+    const wordList = ["Apfel", "Berlin", "Liebe", "Schach", "Elefant", "Albert Einstein", "Trompete", "Wüste", "Angst", "iPhone",
+      "Tiger", "Sonne", "Wasserfall", "Geduld", "Kaffee", "New York", "Angela Merkel", "Freiheit", "Ball", "Google",
+      "Katze", "Hund", "Schule", "Mond", "Tesla", "Wolke", "Erde", "Regenbogen", "Glück", "Pizza",
+      "Buch", "Zeit", "Feuer", "Bayern", "Instagram", "Computer", "Auto", "Paris", "Fußball", "Berge",
+      "Meer", "Winter", "Sommer", "Herbst", "Frühling", "Zug", "Brille", "Zahnarzt", "Lehrer", "Kind",
+      "Nacht", "Tag", "Licht", "Dunkelheit", "Straße", "Haus", "Bett", "Stuhl", "Tisch", "Lampe",
+      "Fenster", "Tür", "Blume", "Baum", "Wald", "Fluss", "See", "Motorrad", "Helm", "Musik",
+      "Gitarre", "Klavier", "Song", "Film", "Kino", "Fernseher", "Spiel", "Tanz", "Kunst", "Museum",
+      "Malerei", "Fotografie", "Brot", "Butter", "Milch", "Käse", "Ei", "Banane", "Erdbeere", "Traube",
+      "Herz", "Hass", "Neid", "Freude", "Mut", "Stärke", "Vertrauen", "Respekt", "Sport", "Joggen",
+      "Radfahren", "Schwimmen", "Yoga", "Meditation", "Buchhandlung", "Supermarkt", "Bank", "Arzt", "Krankenhaus",
+      "Zirkus", "Zoo", "Karussell", "Feuerwehr", "Polizei", "Soldat", "Koch", "Bäcker", "Mechaniker", "Pilot",
+      "Flugzeug", "Rakete", "Astronaut", "Wissenschaft", "Technik", "Mathematik", "Biologie", "Chemie", "Physik", "Universität",
+      "Schüler", "Professor", "Klassenzimmer", "Prüfung", "Note", "Zeugnis", "Geburtstag", "Feier", "Party", "Hochzeit",
+      "Baby", "Eltern", "Großeltern", "Onkel", "Tante", "Cousin", "Freund", "Feind", "Nachbar", "Chef",
+      "Kollege", "Arbeit", "Beruf", "Karriere", "Geld", "Lohn", "Steuern", "Rechnung", "Vertrag", "Gericht",
+      "Gesetz", "Strafe", "Gefängnis", "Freiheit", "Grenze", "Land", "Stadt", "Dorf", "Region", "Kontinent",
+      "Afrika", "Asien", "Europa", "Amerika", "Australien", "China", "Indien", "Russland", "USA", "Kanada",
+      "Mexiko", "Brasilien", "Argentinien", "Chile", "Ägypten", "Südafrika", "Japan", "Südkorea", "Thailand", "Vietnam",
+      "Spanien", "Italien", "Frankreich", "Griechenland", "Schweiz", "Österreich", "Deutschland", "Norwegen", "Schweden", "Finnland",
+      "Dänemark", "Polen", "Tschechien", "Ungarn", "Türkei", "Ukraine", "Israel", "Iran", "Irak", "Syrien",
+      "Saudi-Arabien", "Vereinigte Arabische Emirate", "Pakistan", "Bangladesch", "Philippinen", "Indonesien", "Malaysia", "Singapur", "Neuseeland", "Island",
+      "London", "Rom", "Madrid", "Lissabon", "Amsterdam", "Brüssel", "Wien", "Prag", "Zürich", "Genf",
+      "Basel", "Lausanne", "Luzern", "Bern", "Vaduz", "Luxemburg", "Monaco", "San Marino", "Vatikan", "Athen",
+      "Barcelona", "Mailand", "Florenz", "Venedig", "Dubrovnik", "Istanbul", "Dubai", "Doha", "Riad", "Kairo",
+      "Kapstadt", "Johannesburg", "Nairobi", "Lagos", "Accra", "Casablanca", "Tunis", "Algier", "Teheran", "Bagdad",
+      "Damaskus", "Beirut", "Amman", "Jerusalem", "Seoul", "Peking", "Shanghai", "Hongkong", "Taipei", "Manila",
+      "Jakarta", "Kuala Lumpur", "Bangkok", "Hanoi", "Ho-Chi-Minh-Stadt", "Sydney", "Melbourne", "Perth", "Brisbane", "Adelaide", "Himmel", "Hölle", "Tafel", "Schulbuch", "Klassenzimmer", "Pause", "Lehrplan", "Zeugnis", "Klassenarbeit", "Hausaufgabe", "Klassenlehrer", "Direktor", "Pausenhof", "Füller", "Schulranzen", "Klassenfahrt", "Wahl", "Parlament", "Regierung", "Demokratie", "Diktatur", "Minister", "Kanzler", "Präsident", "Abgeordneter", "Gesetz", "Verfassung", "Opposition", "Debatte", "Koalition", "Herz", "Lunge", "Gehirn", "Magen", "Leber", "Blut", "Knochen", "Muskel", "Haut", "Zunge", "Zahn", "Auge", "Nase", "Ohr", "Hals", "Hand", "Fuß", "Bein", "Arm", "Erdbeben", "Vulkan", "Tsunami", "Hurrikan", "Tornado", "Lawine", "Sturm", "Blitz", "Gewitter", "Flut", "Dürre", "Nebel", "Regen", "Schnee", "Eis", "Hitze", "Drache", "Zauberer", "Magie", "Elf", "Zwerg", "Vampir", "Werwolf", "Geist", "Hexe", "Schwert", "Zauberstab", "Amulett", "Trank", "Fluch", "Königreich", "Abenteuer", "Planet", "Stern", "Galaxie", "Mond", "Raumschiff", "Meteor", "Asteroid", "Komet", "Sonnensystem", "Satellit", "Kosmos", "UFO", "Raumstation", "Schwarzes Loch", "Philosophie", "Ethik", "Logik", "Sprache", "Kultur", "Mythologie", "Legende", "Märchen", "Fabel", "Symbol", "Ritual", "Tradition", "Gewohnheit", "Brauchtum", "Mode", "Trend", "Stil", "Design", "Outfit", "Accessoire", "Frisur", "Make-up", "Nagellack", "Parfüm", "Schmuck", "Halskette", "Armband", "Ring", "Ohrring", "Bräutigam", "Braut", "Trauzeuge", "Hochzeitskleid", "Blumenstrauß", "Ringkissen", "Torte", "Tanzfläche", "DJ", "Redner", "Feuerwerk", "Lichterkette", "Fotoalbum", "Fotobox", "Erinnerung", "Träne", "Lächeln", "Umarmung", "Kuss", "Geschenk", "Dankeskarte", "Sitzordnung", "Einladung", "Tischdeko", "Kerzenhalter", "Serviette", "Menükarte", "Buffet", "Mitternachtssnack", "Sektempfang", "Brautstrauß", "Brautjungfer", "Hochzeitsreise", "Flitterwochen", "Reis", "Konfetti", "Tauben", "Oldtimer", "Limousine", "Ringe", "Versprechen", "Standesamt", "Kirche", "Freie Trauung", "Gästeliste", "Planung", "Organisation", "Hochzeitsplaner", "Budget", "Location", "Catering"   // 🐾 Tiere
+  "Hund", "Katze", "Maus", "Löwe", "Bär", "Fuchs", "Hase", "Delfin", "Wal", "Hai", "Adler", "Falke", "Eule", "Schlange", "Krokodil", "Zebra", "Giraffe", "Affe", "Kuh", "Schwein", "Ziege", "Schaf", "Pferd", "Ente", "Gans", "Huhn", "Pfau", "Lama", "Känguru", "Koala", "Pinguin", "Seehund", "Krabbe", "Qualle", "Ameise", "Biene", "Wespe", "Spinne", "Marienkäfer", "Schnecke", "Esel", "Ratte", "Dachs", "Marder", "Maulwurf", "Elch",
+
+  // 🧑‍💼 Berufe
+  "Arzt", "Lehrer", "Polizist", "Bäcker", "Metzger", "Maler", "Pilot", "Feuerwehrmann", "Anwalt", "Richter", "Koch", "Kellner", "Mechaniker", "Gärtner", "Friseur", "Elektriker", "Architekt", "Maurer", "Tänzer", "Musiker", "Dirigent", "Fotograf", "Schauspieler", "Regisseur", "Programmierer", "Designer", "Modedesigner", "Informatiker", "Ingenieur", "Psychologe", "Apotheker", "Krankenpfleger", "Zahnarzt", "Tierarzt", "Bibliothekar", "Buchhalter", "Banker", "Verkäufer", "Journalist", "Autor", "Dolmetscher", "Landwirt", "Seemann", "Matrose", "Astronaut", "Wissenschaftler", "Biologe", "Chemiker",
+
+  // 🍔 Essen & Trinken
+  "Pizza", "Burger", "Pommes", "Spaghetti", "Lasagne", "Sushi", "Tacos", "Burrito", "Salat", "Steak", "Suppe", "Brot", "Brötchen", "Croissant", "Donut", "Muffin", "Apfel", "Banane", "Erdbeere", "Kirsche", "Traube", "Orange", "Zitrone", "Melone", "Gurke", "Tomate", "Karotte", "Kartoffel", "Zwiebel", "Knoblauch", "Käse", "Schinken", "Wurst", "Fisch", "Reis", "Ei", "Joghurt", "Milch", "Kaffee", "Tee", "Cola", "Limo", "Wasser", "Saft", "Bier", "Wein", "Cocktail", "Eis",
+
+  // 🧳 Orte
+  "Schule", "Krankenhaus", "Kirche", "Bahnhof", "Flughafen", "Supermarkt", "Kino", "Theater", "Museum", "Zoo", "Park", "Wald", "Strand", "Wüste", "Insel", "Stadt", "Dorf", "Berg", "Tal", "See", "Fluss", "Meer", "Schwimmbad", "Turnhalle", "Stadion", "Restaurant", "Café", "Bar", "Hotel", "Tankstelle", "Bank", "Post", "Bibliothek", "Markt", "Rathaus", "Polizei", "Feuerwehr", "Apotheke", "Bäckerei", "Metzgerei", "Werkstatt", "Wohnung", "Haus", "Keller", "Dachboden", "Garage", "Garten", "Balkon", "Straße",
+
+  // 🎮 Technik & Medien
+  "Laptop", "Handy", "Tablet", "Fernseher", "Radio", "Kamera", "Drohne", "Kopfhörer", "Mikrofon", "Maus", "Tastatur", "Monitor", "USB-Stick", "Festplatte", "Lautsprecher", "Smartwatch", "Drucker", "Scanner", "Router", "Konsole", "Controller", "Spiel", "App", "E-Mail", "Passwort", "Cloud", "Datei", "Screenshot", "Akku", "WLAN", "Bluetooth", "Browser", "Google", "YouTube", "Instagram", "TikTok", "Facebook", "Snapchat", "WhatsApp", "Netflix", "Spotify", "Zoom", "Discord", "Twitter", "Twitch",
+
+  // ⚽ Hobbys & Sport
+  "Fußball", "Basketball", "Tennis", "Volleyball", "Handball", "Schwimmen", "Laufen", "Radfahren", "Klettern", "Skifahren", "Snowboard", "Reiten", "Tanzen", "Singen", "Gitarre", "Klavier", "Schlagzeug", "Geige", "Zeichnen", "Malen", "Basteln", "Nähen", "Stricken", "Kochen", "Backen", "Lesen", "Schreiben", "Fotografieren", "Wandern", "Angeln", "Segeln", "Yoga", "Fitness", "Bodybuilding", "Tauchen", "Skaten", "Bowling", "Billard", "Dart", "Schach", "Videospiele", "Kartenspiele", "Brettspiele", "Reisen",
+
+  // 🧠 Abstrakte Begriffe
+  "Liebe", "Hass", "Angst", "Freude", "Wut", "Glück", "Trauer", "Mut", "Hoffnung", "Glaube", "Vertrauen", "Zeit", "Raum", "Energie", "Idee", "Gedanke", "Traum", "Ziel", "Problem", "Lösung", "Ordnung", "Chaos", "Macht", "Freiheit", "Friede", "Krieg", "Gerechtigkeit", "Wahrheit", "Lüge", "Erinnerung", "Zukunft", "Vergangenheit", "Realität", "Fantasie", "Wissen", "Unwissenheit", "Motivation", "Disziplin", "Ehrgeiz", "Stolz", "Scham", "Neid", "Gier", "Mut", "Geduld", "Ehre",
+
+  // 🧸 Gegenstände
+  "Tisch", "Stuhl", "Bett", "Schrank", "Lampe", "Uhr", "Spiegel", "Teppich", "Buch", "Heft", "Stift", "Radiergummi", "Lineal", "Rucksack", "Koffer", "Tasche", "Brille", "Mütze", "Hut", "Jacke", "Schuhe", "Socken", "Handyhülle", "Schlüssel", "Schloss", "Messer", "Gabel", "Löffel", "Teller", "Tasse", "Glas", "Flasche", "Besen", "Eimer", "Seife", "Zahnbürste", "Handtuch", "Decke", "Kissen", "Kerze", "Bilderrahmen", "Kalender", "Notizbuch", "Fernbedienung", "Spielzeug", "Würfel",
+
+  // 🎉 Feiertage & Feste
+  "Weihnachten", "Ostern", "Halloween", "Silvester", "Neujahr", "Geburtstag", "Hochzeit", "Jubiläum", "Fasnacht", "Karneval", "Valentinstag", "Muttertag", "Vatertag", "Erntedank", "Nikolaus", "Advent", "Ramadan", "Hanukkah", "Oktoberfest", "Ferien", "Urlaub", "Wochenende",
+
+  // 🌍 Länder & Städte
+  "Schweiz", "Deutschland", "Österreich", "Frankreich", "Italien", "Spanien", "Portugal", "Griechenland", "Türkei", "USA", "Kanada", "Brasilien", "Argentinien", "Mexiko", "Japan", "China", "Südkorea", "Indien", "Russland", "Ägypten", "Marokko", "Südafrika", "Australien", "Neuseeland", "Norwegen", "Schweden", "Dänemark", "Finnland", "Polen", "Tschechien", "Ungarn", "Rumänien", "Bulgarien", "Kroatien", "Serbien", "Slowenien", "Luzern", "Zürich", "Bern", "Genf", "Basel", "Wien", "Paris", "Rom", "Berlin", "Hamburg", "München"];
 
     function show(screenName) {
       Object.values(screens).forEach(s => s.style.display = "none");
